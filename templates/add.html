@@ -6,7 +6,15 @@
   <form method="POST">
       {# This hidden_tag is a CSRF security feature. #}
       {{ form.hidden_tag() }}
-      {{ form.name.label }} {{ form.name() }}
+      {{ form.name.label }} {{ form.name() }}<br>
+      {{ form.gender.label }} {{ form.gender() }}<br>
+      {{ form.age.label }} {{ form.age() }}<br>
+      {{ form.color.label }} {{ form.color() }}<br>
+      {{ form.size.label }} {{ form.size() }}<br>
+      {{ form.weight.label }} {{ form.weight() }}<br>
+      {{ form.aptitude.label }} {{ form.aptitude() }}<br>
+      {{ form.tricks.label }} {{ form.tricks() }}<br>
+      {{ form.favorite_food.label }} {{ form.favorite_food() }}<br>
       {{ form.submit() }}
   </form>
 </div>

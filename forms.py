@@ -19,11 +19,11 @@ class AddForm(FlaskForm):
 class AddOwnerForm(FlaskForm):
 
     name = StringField('Name of Owner:')
-    pup_id = IntegerField("Id of Puppy: ")
+    puppy_id = IntegerField("Id of Puppy: ")
     address = StringField('Address:')
-    city = StringField('City')
-    state = StringField('State')
-    phone = StringField('Phone Number')
+    city = StringField('City:')
+    state = StringField('State:')
+    phone = StringField('Phone Number:')
     submit = SubmitField('Add Owner')
 
 class DelForm(FlaskForm):
