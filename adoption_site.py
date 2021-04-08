@@ -4,6 +4,8 @@ from forms import  AddForm , DelForm, AddOwnerForm
 from flask import Flask, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from config import username, password
+
 app = Flask(__name__)
 # Key for Forms
 app.config['SECRET_KEY'] = 'mysecretkey'
@@ -14,7 +16,7 @@ app.config['SECRET_KEY'] = 'mysecretkey'
 
 ##########################################
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@localhost/puppies_db' # DB connection
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:9hannah9ms@localhost/dogs_db' # DB connection
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # DB connection
 
 db = SQLAlchemy(app)
@@ -27,12 +29,21 @@ class Puppy(db.Model):
     name = db.Column(db.Text)
     owner = db.relationship('Owner',backref='puppy',uselist=False)
 
-    def __init__(self,name):
+    def __init__(self, name, color, size, weight, aptitude, tricks):
+        self.puppy_id = puppy_id
         self.name = name
+        self.gender = gender
+        self.age = age
+        self.color = color
+        self.size = size
+        self.weight = weight
+        self.aptitude = aptitude
+        self.tricks = tricks
+        self.favoritefood = favorite_food
 
     def __repr__(self):
         if self.owner:
-            return f"Puppy name is {self.name} and owner is {self.owner.name}"
+            return f"Puppy name is {self.name} and owner is {self.owner.name}. They live at {self.address}, {city}, {self.state} and can be contacted at {self.phone}"
         else:
             return f"Puppy name is {self.name} and has no owner assigned yet."
 
@@ -45,9 +56,14 @@ class Owner(db.Model):
     # We use puppies.id because __tablename__='puppies'
     puppy_id = db.Column(db.Integer,db.ForeignKey('puppies.id'))
 
-    def __init__(self,name,puppy_id):
-        self.name = name
-        self.puppy_id = puppy_id
+    def __init__(self, name, address, city, state, phone):
+    	self.name = name
+    	self.address = address
+    	self.city = city
+    	self.state = state
+    	self.phone = phone
+
+
 
     def __repr__(self):
         return f"Owner Name: {self.name}"
